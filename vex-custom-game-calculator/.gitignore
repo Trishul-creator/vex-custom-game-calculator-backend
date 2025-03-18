@@ -32,4 +32,4 @@ build/
 ### VS Code ###
 .vscode/
 
-vex-custom-game-calculator/
+/vex-custom-game-calculator/
