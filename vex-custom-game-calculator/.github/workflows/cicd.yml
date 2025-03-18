@@ -2,8 +2,7 @@ name: CICD
 
 on:
   push:
-    branches: 
-      - deploy-project-to-ec2
+    branches: [deploy-project-to-ec2]
 
 jobs:
   build:
@@ -21,19 +20,20 @@ jobs:
       - name: Login to docker hub
         run: docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}}
       - name: Build Docker Image
-        run: docker build -t ./vex-custom-game-calculator
+        run: docker build -t /Users/gurumurthyvenkataraman/Vex Custom Game Web App/vex-custom-game-calculator
       - name: Publish image to docker hub
-        run: docker push ./vex-custom-game-calculator:latest
+        run: docker push /Users/gurumurthyvenkataraman/Vex Custom Game Web App/vex-custom-game-calculator:latest
   
   deploy:
     needs: build
     runs-on: [aws-ec2]
     steps:
       - name: Pull Image From docker hub
-        run: docker pull ./vex-custom-game-calculator:latest
+        run: docker pull /Users/gurumurthyvenkataraman/Vex Custom Game Web App/vex-custom-game-calculator:latest
       - name: Delete old container
         run: docker rm -f vex-custom-game-calculator-container
       - name: Run docker container
-        run: docker run -d -p 8080:8080 --name vex-custom-game-calculator-container ./vex-custom-game-calculator
+        run: docker run -d -p 8080:8080 --name vex-custom-game-calculator-container /Users/gurumurthyvenkataraman/Vex Custom Game Web App/vex-custom-game-calculator
+	
 		  
 
